@@ -11,4 +11,4 @@ function bread() {
     return bread.join("\n");
 }
 
-console.log(bread)
+console.log(bread())
