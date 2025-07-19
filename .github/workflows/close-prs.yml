@@ -1,0 +1,19 @@
+name: Auto-close PRs
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  close-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh -y
+
+      - name: Close PR with GH CLI
+        run: |
+          gh pr close "$PR_URL" --comment "👋 This repository is only for Discussions — pull requests are not accepted here." --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
