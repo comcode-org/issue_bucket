@@ -11,9 +11,9 @@ jobs:
       - name: Install GitHub CLI
         run: sudo apt-get install gh -y
 
-      - name: Close PR with GH CLI
+      - name: Close PR and delete branch
         run: |
-          gh pr close "$PR_URL" --comment "👋 This repository is only for Discussions — pull requests are not accepted here." --delete-branch
+          gh pr close "$PR_URL" --delete-branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
